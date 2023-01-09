@@ -1,0 +1,1 @@
+This is my attempt at Danny Ma's 8 Week SQL challenge. Periodically, I will be committing my solution to the questions.
