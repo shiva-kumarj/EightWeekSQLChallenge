@@ -1,5 +1,4 @@
 -- Analyzing diner sales using SQL.
-
 use diner_sales;
 -- 1. what is the total amount each customer spent at the restaurant?
 select customer_id, sum(menu.price) as total_spent
