@@ -149,6 +149,7 @@ I also utilized various SQL functions such as `round`, `coalesce`, and `lower` t
 1. What is the successful delivery percentage for each runner?
 | runner_id | success_percent |
 |-----------|-----------------|
+
 | 1         | 100             |
 | 2         | 75              |
 | 3         | 50              |
