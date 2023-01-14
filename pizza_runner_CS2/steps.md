@@ -79,3 +79,76 @@ I also utilized various SQL functions such as `round`, `coalesce`, and `lower` t
 | 5           | 3      |
 | 6           | 1      |
 | 7           | 5      |
+
+## B. Runner and Customer Experience
+
+1. How many runners signed up for each 1 week period? (i.e. week starts 2021-01-01)
+| week_num | num_runners |
+|----------|-------------|
+| 0        | 1           |
+| 1        | 2           |
+| 2        | 1           |
+
+2. What was the average time in minutes it took for each runner to arrive at the Pizza Runner HQ to pickup the order?
+| runner_id | avg_time_minutes |
+|-----------|------------------|
+| 1         | 15               |
+| 2         | 24               |
+| 3         | 10               |
+
+3. Is there any relationship between the number of pizzas and how long the order takes to prepare?
+| order_id | num_orders | prep_time_minute |
+|----------|------------|------------------|
+| 4        | 3          | 30               |
+| 3        | 2          | 21               |
+| 10       | 2          | 16               |
+| 1        | 1          | 10               |
+| 2        | 1          | 10               |
+| 5        | 1          | 10               |
+| 7        | 1          | 10               |
+| 8        | 1          | 21               |
+
+
+4. What was the average distance travelled for each customer?
+| customer_id | avg_dist_km |
+|-------------|-------------|
+| 101         | 20          |
+| 102         | 16          |
+| 103         | 23          |
+| 104         | 10          |
+| 105         | 25          |
+
+1. What was the difference between the longest and shortest delivery times for all orders?
+| order_id | delivery_time |
+|----------|---------------|
+| 1        | 42            |
+| 2        | 37            |
+| 3        | 41            |
+| 3        | 41            |
+| 4        | 70            |
+| 4        | 70            |
+| 4        | 70            |
+| 5        | 25            |
+| 7        | 35            |
+| 8        | 36            |
+| 10       | 26            |
+| 10       | 26            |
+
+1. What was the average speed for each runner for each delivery and do you notice any trend for these values?
+| runner_id | order_id | avg_speed |
+|-----------|----------|-----------|
+| 1         | 1        | 37.5      |
+| 1         | 2        | 44.444444 |
+| 1         | 3        | 39        |
+| 2         | 4        | 34.5      |
+| 3         | 5        | 40        |
+| 2         | 7        | 60        |
+| 2         | 8        | 92        |
+| 1         | 10       | 60        |
+
+1. What is the successful delivery percentage for each runner?
+| runner_id | success_percent |
+|-----------|-----------------|
+| 1         | 100             |
+| 2         | 75              |
+| 3         | 50              |
