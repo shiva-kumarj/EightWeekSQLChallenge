@@ -64,3 +64,6 @@ INSERT INTO pizza_toppings
 VALUES
   (0, 'None');
 
+-- Cleaning pizza_recipes
+Alter Table pizza_recipes
+alter column toppings varchar(50);
