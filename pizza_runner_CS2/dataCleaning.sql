@@ -66,4 +66,4 @@ VALUES
 
 -- Cleaning pizza_recipes
 Alter Table pizza_recipes
-alter column toppings varchar(50);
+alter column toppings varchar(max);
