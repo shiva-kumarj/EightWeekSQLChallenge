@@ -11,8 +11,6 @@ End
 GO
 
 -- Cleaning customer_orders table
-select order_id, exclusions, extras from customer_orders;
-
 -- Clean 'exclusions' column of customer_orders table
 update customer_orders
 set exclusions = case when exclusions in ('', 'null') then null else exclusions end
@@ -30,6 +28,25 @@ set exclusions = case when exclusions is null then '0' else exclusions end;
 
 update customer_orders 
 set extras = case when extras is null then '0' else extras end;
+
+-- Converting 
+Alter Table customer_orders
+alter column extras varchar(max);
+
+Alter Table customer_orders
+alter column exclusions varchar(max);
+
+-- Removing duplicate rows from customer_orders
+with cte as 
+(select *, 
+row_number() over (
+  partition by order_id, pizza_id, order_time, exclusions, extras 
+  order by order_id) as row_num
+  from customer_orders)
+
+delete from cte
+where row_num > 1;
+
 
 -- Clean runner_orders table
 -- Clean distance column
@@ -67,3 +84,7 @@ VALUES
 -- Cleaning pizza_recipes
 Alter Table pizza_recipes
 alter column toppings varchar(max);
+
+-- Convert "topping_name" column of pizza_toppings from text to string
+alter table pizza_toppings
+alter column topping_name varchar(max);  
