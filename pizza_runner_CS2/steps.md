@@ -4,7 +4,8 @@ I wrote a SQL script that performs data cleaning and manipulation on various col
 - Setting null values to certain columns 
 - Replacing null values with a default of '0' 
 - Cleaning and formatting columns by calling custom functions, and 
-- Inserting a new row and altering the data type of certain columns.
+- Inserting a new row and altering the data type of certain columns from `text` to `varchar`.
+- Removing duplicate rows
 
 I also utilized various SQL functions such as `round`, `coalesce`, and `lower` to format and standardize the data in the columns.
 
