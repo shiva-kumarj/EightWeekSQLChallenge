@@ -15,9 +15,9 @@ I also utilized various SQL functions such as `round`, `coalesce`, and `lower` t
 3. The number of successful orders delivered by each runner is as follows
     | runner_id | orders_delivered |
     |---------- |------------------|
-    | 1         | 4                 |
-    | 2         | 3                 |
-    | 3         | 1                 |
+    | 2         | 3                |
+    | 1         | 4                |
+    | 3         | 1                |
     
 
 4. The number of each type of pizza delivered is as follows:

@@ -88,3 +88,16 @@ alter column toppings varchar(max);
 -- Convert "topping_name" column of pizza_toppings from text to string
 alter table pizza_toppings
 alter column topping_name varchar(max);  
+
+-- removing duplicate rows from pizza_toppings
+
+with cte1 as
+(
+  select topping_id, topping_name, 
+  ROW_NUMBER() over (partition by topping_id order by topping_id) as row_num
+from pizza_toppings
+)
+
+delete from cte1
+where row_num > 1;
+
