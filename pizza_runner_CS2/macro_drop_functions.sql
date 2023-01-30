@@ -7,13 +7,13 @@ select @@SERVERNAME as server_name, DB_NAME() as db_name;
 
 use PIZZA_RESTAURANT;
 
-IF OBJECT_ID('pizza_restaurant..dropFunctionsEnabled') IS NOT NULL
-    DROP TABLE dropFunctionsEnabled;
+IF OBJECT_ID('pizza_restaurant..#dropFunctionsEnabled') IS NOT NULL
+    DROP TABLE #dropFunctionsEnabled;
 
 
-CREATE TABLE dropFunctionsEnabled (enabled BIT);
+CREATE TABLE #dropFunctionsEnabled (enabled BIT);
 
-INSERT INTO dropFunctionsEnabled (enabled) VALUES (1);
+INSERT INTO #dropFunctionsEnabled (enabled) VALUES (1);
 
 GO
 
@@ -27,12 +27,12 @@ GO
 CREATE PROCEDURE dbo.toggleDropFunctions (@enable BIT)
 AS
 BEGIN
-    UPDATE dropFunctionsEnabled SET enabled = @enable;
+    UPDATE #dropFunctionsEnabled SET enabled = @enable;
 END
 GO
 
 -- DROP FUNCTION statement that uses the macro
-IF EXISTS (SELECT 1 FROM dropFunctionsEnabled WHERE enabled = 1)
+IF EXISTS (SELECT 1 FROM #dropFunctionsEnabled WHERE enabled = 1)
 BEGIN
     DROP FUNCTION [dbo].[ingredientIdtoName];
     DROP FUNCTION [dbo].[getIngredientName];
@@ -41,6 +41,6 @@ BEGIN
 END
 GO
 
-select * from dropFunctionsEnabled;
+select * from #dropFunctionsEnabled;
 EXEC dbo.toggleDropFunctions 1;
 

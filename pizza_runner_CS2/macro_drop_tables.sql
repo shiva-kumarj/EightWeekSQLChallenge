@@ -41,4 +41,4 @@ end
 GO
 
 select * from #dropTablesFunction;
-exec dbo.toggleDropTables 0;
+exec dbo.toggleDropTables 1;
