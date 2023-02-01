@@ -159,4 +159,52 @@ I also utilized various SQL functions such as `round`, `coalesce`, and `lower` t
     | 1         | 100             |
     | 2         | 75              |
     | 3         | 50              |
-    
+
+## C. Ingredient Optimization
+
+1. What are the standard ingredients for each pizza?
+
+    | Ingredients |
+    | --- |
+    | Cheese |
+    | Mushrooms |
+
+2. What was the most commonly added extra?
+
+    | Topping Name | Topping Count |
+    | --- | --- |
+    | Bacon | 4 |
+    | Cheese | 1 |
+    | Chicken | 1 |
+
+3. What was the most common exclusion?
+
+    | Topping Name  | Times Excluded |
+    | ---           | ---:           |
+    | Cheese        | 3              |
+    | Mushrooms     | 1              |
+    | BBQ Sauce     | 1              |
+
+4. Generate an order item for each record in the customers_orders table in the format of one of the following:
+
+    ### Meat Lovers
+    ### Meat Lovers - Exclude Beef
+    ### Meat Lovers - Extra Bacon
+    ### Meat Lovers - Exclude Cheese, Bacon - Extra Mushroom, Peppers
+
+
+    | Order ID | Customer ID | Pizza ID | Exclusions | Extras | Order Time | Readable Pizza Order |
+    | --- | --- | --- | --- | --- | --- | --- |
+    | 1 | 101 | 1 | 0 | 0 | 2020-01-01 18:05:02.000 | Meatlovers |
+    | 2 | 101 | 1 | 0 | 0 | 2020-01-01 19:00:52.000 | Meatlovers |
+    | 3 | 102 | 1 | 0 | 0 | 2020-01-02 23:51:23.000 | Meatlovers |
+    | 3 | 102 | 2 | 0 | 0 | 2020-01-02 23:51:23.000 | Vegetarian |
+    | 4 | 103 | 1 | 4 | 0 | 2020-01-04 13:23:46.000 | Meatlovers - Exclude Cheese |
+    | 4 | 103 | 2 | 4 | 0 | 2020-01-04 13:23:46.000 | Vegetarian - Exclude Cheese |
+    | 5 | 104 | 1 | 0 | 1 | 2020-01-08 21:00:29.000 | Meatlovers - Extra Bacon |
+    | 6 | 101 | 2 | 0 | 0 | 2020-01-08 21:03:13.000 | Vegetarian |
+    | 7 | 105 | 2 | 0 | 1 | 2020-01-08 21:20:29.000 | Vegetarian - Extra Bacon |
+    | 8 | 102 | 1 | 0 | 0 | 2020-01-09 23:54:33.000 | Meatlovers |
+    | 9 | 103 | 1 | 4 | 1, 5 | 2020-01-10 11:22:59.000 | Meatlovers - Exclude Cheese - Extra Bacon, Chicken |
+    | 10 | 104 | 1 | 0 | 0 | 2020-01-11 18:34:49.000 | Meatlovers |
+    | 10 | 104 | 1 | 2, 6 | 1, 4 | 2020-01-11 18:34:49.000 | Meatlovers - Exclude BBQ Sauce, Mushrooms - Extra Bacon, Cheese |
