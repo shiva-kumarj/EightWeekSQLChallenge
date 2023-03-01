@@ -94,7 +94,7 @@ with
     split_recipes(pizza_id, ingredient, toppings)
     as
     (
-        select pizza_id,
+                    select pizza_id,
                 left(toppings, charindex(',', toppings + ',') - 1),
                 stuff(toppings, 1, charindex(',', toppings + ','), '')
             from pizza_recipes
@@ -130,7 +130,7 @@ FROM
         ON pizza_1.ingredient = pizza_2.ingredient) AS basic_ingredients
     JOIN pizza_toppings
     ON pizza_toppings.topping_id = basic_ingredients.ingredient;
-    
+
 -- 2. What was the most commonly added extra?
 
 with
