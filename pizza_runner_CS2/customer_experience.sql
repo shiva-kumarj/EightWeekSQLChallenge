@@ -59,8 +59,6 @@ order by customer_id;
 -- 5. What was the difference between the longest and shortest delivery times for all orders? 
 -- Note: delivery time = prep_time + drive_duration(duration)
 
-SET STATISTICS TIME ON
-
 select order_id, (prep_time_minute + cast(duration as int)) as delivery_time
 from 
 (select co.order_id as ord_id, datediff(minute, order_time, pickup_time) as prep_time_minute
