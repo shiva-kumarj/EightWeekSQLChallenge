@@ -10,6 +10,7 @@ End
 
 GO
 
+
 -- Cleaning customer_orders table
 -- Clean 'exclusions' column of customer_orders table
 update customer_orders
@@ -48,6 +49,18 @@ delete from cte
 where row_num > 1;
 
 
+-- Removing spaces from columns with comma-separated-values
+update customer_orders 
+set extras = (
+  replace(extras, ' ', '')
+);
+
+update customer_orders
+set exclusions = (
+  replace(exclusions, ' ', '')
+);
+
+
 -- Clean runner_orders table
 -- Clean distance column
 update runner_orders
@@ -84,6 +97,12 @@ VALUES
 -- Cleaning pizza_recipes
 Alter Table pizza_recipes
 alter column toppings varchar(max);
+
+-- Removing all spaces from the topping_id column
+update pizza_recipes
+set toppings = (
+  replace(toppings, ' ', '')
+);
 
 -- Convert "topping_name" column of pizza_toppings from text to string
 alter table pizza_toppings
