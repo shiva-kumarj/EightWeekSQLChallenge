@@ -37,6 +37,7 @@ begin
     DROP TABLE [dbo].[unique_recipes]
     DROP TABLE [dbo].[extra_toppings]
     DROP TABLE [dbo].[common_exclusions]
+    DROP TABLE [dbo].[final_pizza_ingredients]
 end
 GO
 
