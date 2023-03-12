@@ -34,13 +34,8 @@ select *,
 into final_pizza_ingredients
 from cte1;
 
-
 -- 1. Using result of above query form a list of final ingredients in each order_id
 -- 2. convert comma separated values of topping_id into ingredient names
-select order_id, 
-dbo.ingredientIdtoName(final_pizza_toppings) as pizza_ingredients 
-from final_pizza_ingredients;
-
 -- Adding a new column "topping_names" to hold the pizza ingredient names
 alter table final_pizza_ingredients
 add topping_names varchar(max);
@@ -50,10 +45,78 @@ update final_pizza_ingredients
 set topping_names = (select dbo.ingredientIdtoName(final_pizza_toppings))
 where order_id in (select order_id from final_pizza_ingredients);
 
-select toppings_intr, topping_names from final_pizza_ingredients;
+select order_id, toppings_intr, topping_names from final_pizza_ingredients;
 
--- 3. Sort the ingredient names alphabetically.
+-- 3. Sort the ingredient names alphabetically. 
+-- put the sorted ingredients in a column "ordered_toppings"
 
+alter table final_pizza_ingredients
+add ordered_toppings varchar(max);    
+
+update final_pizza_ingredients
+set ordered_toppings = 
+(
+    select string_agg (value, ',') within group(order by value)
+    from string_split(topping_names, ',')
+)
+
+select * from final_pizza_ingredients;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+alter table final_pizza_ingredients 
+add ordered_toppings varchar(max);
+
+select 
+(
+    select string_agg(value, ',') within group
+    (
+        order by value
+    )
+    from string_split(topping_names, ',')
+) as ordered_toppings
+into ordered_toppings
+from final_pizza_ingredients;
 -- 4. Use window function of width 2 and if 2 elements in the window are the same then, 
 -- shorten that into "2x<ingredient>"
 
