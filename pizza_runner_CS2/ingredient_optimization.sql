@@ -23,11 +23,11 @@ GO
 
 -- Function that takes in the ingredient_id as a comma separated value of integers and
 -- returns their respective names in a comma delimited fasion. 
-create function dbo.ingredientIdtoName(@ingredients_id_csv varchar(50))
-returns varchar(50)
+create function dbo.ingredientIdtoName(@ingredients_id_csv varchar(max))
+returns varchar(max)
 as 
 begin
-    declare @ingredient_names_csv varchar(50) = ''
+    declare @ingredient_names_csv varchar(max) = ''
     while len(@ingredients_id_csv) > 0
     begin
         declare @split_id int = 0;
@@ -36,7 +36,7 @@ begin
         begin
             set @split_id = left(@ingredients_id_csv, @first_comma_index - 1);
             set @ingredients_id_csv = stuff(@ingredients_id_csv, 1, @first_comma_index, '');
-            set @ingredient_names_csv = @ingredient_names_csv + dbo.getIngredientName(@split_id) + ', ';
+            set @ingredient_names_csv = @ingredient_names_csv + dbo.getIngredientName(@split_id) + ',';
         end
         else
         begin
