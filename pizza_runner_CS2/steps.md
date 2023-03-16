@@ -213,18 +213,18 @@ I also utilized various SQL functions such as `round`, `coalesce`, and `lower` t
    customer_orders table and add a 2x in front of any relevant ingredients
    ### For example: "Meat Lovers: 2xBacon, Beef, ... , Salami"
 
-    ### | numbered_ingredients                                    |
-    ### |---------------------------------------------------------|
-    ### | Bacon,BBQ Sauce,Beef,Cheese,Chicken,Mushrooms,Pepperoni,Salami |
-    ### | Bacon,BBQ Sauce,Beef,Cheese,Chicken,Mushrooms,Pepperoni,Salami |
-    ### | Bacon,BBQ Sauce,Beef,Cheese,Chicken,Mushrooms,Pepperoni,Salami |
-    ### | Cheese,Mushrooms,Onions,Peppers,Tomato Sauce,Tomatoes     |
-    ### | Bacon,BBQ Sauce,Beef,Chicken,Mushrooms,Pepperoni,Salami   |
-    ### | Mushrooms,Onions,Peppers,Tomato Sauce,Tomatoes            |
-    ### | **2xBacon**,BBQ Sauce,Beef,Cheese,Chicken,Mushrooms,Pepperoni,Salami |
-    ### | Cheese,Mushrooms,Onions,Peppers,Tomato Sauce,Tomatoes     |
-    ### | Bacon,Cheese,Mushrooms,Onions,Peppers,Tomato Sauce,Tomatoes |
-    ### | Bacon,BBQ Sauce,Beef,Cheese,Chicken,Mushrooms,Pepperoni,Salami |
-    ### | **2xBacon**,BBQ Sauce,Beef,**2xChicken**,Mushrooms,Pepperoni,Salami |
-    ### | Bacon,BBQ Sauce,Beef,Cheese,Chicken,Mushrooms,Pepperoni,Salami |
-    ### | **2xBacon**,Beef,**2xCheese**,Chicken,Pepperoni,Salami            |
+    | numbered_ingredients                                    |
+    |---------------------------------------------------------|
+    | Bacon,BBQ Sauce,Beef,Cheese,Chicken,Mushrooms,Pepperoni,Salami |
+    | Bacon,BBQ Sauce,Beef,Cheese,Chicken,Mushrooms,Pepperoni,Salami |
+    | Bacon,BBQ Sauce,Beef,Cheese,Chicken,Mushrooms,Pepperoni,Salami |
+    | Cheese,Mushrooms,Onions,Peppers,Tomato Sauce,Tomatoes     |
+    | Bacon,BBQ Sauce,Beef,Chicken,Mushrooms,Pepperoni,Salami   |
+    | Mushrooms,Onions,Peppers,Tomato Sauce,Tomatoes            |
+    | **2xBacon**,BBQ Sauce,Beef,Cheese,Chicken,Mushrooms,Pepperoni,Salami |
+    | Cheese,Mushrooms,Onions,Peppers,Tomato Sauce,Tomatoes     |
+    | Bacon,Cheese,Mushrooms,Onions,Peppers,Tomato Sauce,Tomatoes |
+    | Bacon,BBQ Sauce,Beef,Cheese,Chicken,Mushrooms,Pepperoni,Salami |
+    | **2xBacon**,BBQ Sauce,Beef,**2xChicken**,Mushrooms,Pepperoni,Salami |
+    | Bacon,BBQ Sauce,Beef,Cheese,Chicken,Mushrooms,Pepperoni,Salami |
+    | **2xBacon**,Beef,**2xCheese**,Chicken,Pepperoni,Salami            |
