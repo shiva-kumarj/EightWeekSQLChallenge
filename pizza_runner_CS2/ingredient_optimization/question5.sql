@@ -37,6 +37,7 @@ from cte1;
 -- Adding a new column "topping_names" to hold the pizza ingredient names
 alter table final_pizza_ingredients
 add topping_names varchar(max);
+GO
 
 -- Put the topping names in the respective column
 update final_pizza_ingredients
@@ -48,6 +49,7 @@ where order_id in (select order_id from final_pizza_ingredients);
 
 alter table final_pizza_ingredients
 add ordered_toppings varchar(max);    
+GO
 
 update final_pizza_ingredients
 set ordered_toppings = 
@@ -55,14 +57,17 @@ set ordered_toppings =
     select string_agg (value, ',') within group(order by value)
     from string_split(topping_names, ',')
 )
+GO
 
 -- Dropping redundant columns
 alter table final_pizza_ingredients
 drop column toppings_intr, final_pizza_toppings, topping_names;
+GO
 
 -- Alter the table to add an identity column to it
 alter table final_pizza_ingredients
 add pk int identity(1, 1); 
+GO
 
 -- Joining the ordered and numbered toppings with the final_pizza_ingredients
 select * from
@@ -96,7 +101,7 @@ on sub2.pk = sub3.pk;
 
 alter table customer_orders
 add pk int identity(1, 1);
-
+GO
 
 -- Same result but with the customer_orders table. 
 select order_id, customer_id,
@@ -121,3 +126,7 @@ from
     ) as sub2
     on customer_orders.pk = sub2.temp_pk
 ) as sub5;
+
+alter table customer_orders
+drop column pk;
+GO
