@@ -1,5 +1,3 @@
--- create table final_pizza_ingredients(pizza_id int, final_pizza_toppings varchar(max));
--- drop table dbo.final_pizza_ingredients;
 -- 5. Generate an alphabetically ordered comma separated ingredient list for each pizza order from the customer_orders table and add a 2x in front of any relevant ingredients
 -- For example: "Meat Lovers: 2xBacon, Beef, ... , Salami"
 
@@ -45,8 +43,6 @@ update final_pizza_ingredients
 set topping_names = (select dbo.ingredientIdtoName(final_pizza_toppings))
 where order_id in (select order_id from final_pizza_ingredients);
 
-select order_id, toppings_intr, topping_names from final_pizza_ingredients;
-
 -- 3. Sort the ingredient names alphabetically. 
 -- put the sorted ingredients in a column "ordered_toppings"
 
@@ -60,64 +56,68 @@ set ordered_toppings =
     from string_split(topping_names, ',')
 )
 
-select * from final_pizza_ingredients;
+-- Dropping redundant columns
+alter table final_pizza_ingredients
+drop column toppings_intr, final_pizza_toppings, topping_names;
 
+-- Alter the table to add an identity column to it
+alter table final_pizza_ingredients
+add pk int identity(1, 1); 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-alter table final_pizza_ingredients 
-add ordered_toppings varchar(max);
-
-select 
+-- Joining the ordered and numbered toppings with the final_pizza_ingredients
+select * from
 (
-    select string_agg(value, ',') within group
+    select order_id, customer_id, 
+    pizza_id, exclusions, extras,
+    order_time, ordered_toppings, pk
+    from final_pizza_ingredients 
+) as sub3
+
+join
+
+(
+    select distinct pk, string_agg(numbered_ingredients, ',') as numbered_ingredients
+    from
     (
-        order by value
-    )
-    from string_split(topping_names, ',')
-) as ordered_toppings
-into ordered_toppings
-from final_pizza_ingredients;
--- 4. Use window function of width 2 and if 2 elements in the window are the same then, 
--- shorten that into "2x<ingredient>"
+        select pk,
+        case when count(value) > 1 then concat(count(value), 'x', value)
+        else value end as numbered_ingredients
+        from final_pizza_ingredients
+        cross apply string_split(ordered_toppings, ',')
+        group by value, pk 
+    ) as sub1
+    group by pk
+) as sub2
+
+on sub2.pk = sub3.pk;
 
 
+-- -------------------------------------------------------------------
+
+alter table customer_orders
+add pk int identity(1, 1);
+
+
+-- Same result but with the customer_orders table. 
+select order_id, customer_id,
+pizza_id, exclusions, extras, order_time, numbered_ingredients
+from 
+(
+    select * from customer_orders
+    join 
+
+    (
+        select distinct pk as temp_pk, string_agg(numbered_ingredients, ',') as numbered_ingredients
+        from
+        (
+            select pk,
+            case when count(value) > 1 then concat(count(value), 'x', value)
+            else value end as numbered_ingredients
+            from final_pizza_ingredients
+            cross apply string_split(ordered_toppings, ',')
+            group by value, pk 
+        ) as sub1
+        group by pk
+    ) as sub2
+    on customer_orders.pk = sub2.temp_pk
+) as sub5;
