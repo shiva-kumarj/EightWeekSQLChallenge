@@ -208,3 +208,23 @@ I also utilized various SQL functions such as `round`, `coalesce`, and `lower` t
     | 9 | 103 | 1 | 4 | 1, 5 | 2020-01-10 11:22:59.000 | Meatlovers - Exclude Cheese - Extra Bacon, Chicken |
     | 10 | 104 | 1 | 0 | 0 | 2020-01-11 18:34:49.000 | Meatlovers |
     | 10 | 104 | 1 | 2, 6 | 1, 4 | 2020-01-11 18:34:49.000 | Meatlovers - Exclude BBQ Sauce, Mushrooms - Extra Bacon, Cheese |
+
+5. Generate an alphabetically ordered comma separated ingredient list for each pizza order from the 
+   customer_orders table and add a 2x in front of any relevant ingredients
+   ### For example: "Meat Lovers: 2xBacon, Beef, ... , Salami"
+
+    ### | numbered_ingredients                                    |
+    ### |---------------------------------------------------------|
+    ### | Bacon,BBQ Sauce,Beef,Cheese,Chicken,Mushrooms,Pepperoni,Salami |
+    ### | Bacon,BBQ Sauce,Beef,Cheese,Chicken,Mushrooms,Pepperoni,Salami |
+    ### | Bacon,BBQ Sauce,Beef,Cheese,Chicken,Mushrooms,Pepperoni,Salami |
+    ### | Cheese,Mushrooms,Onions,Peppers,Tomato Sauce,Tomatoes     |
+    ### | Bacon,BBQ Sauce,Beef,Chicken,Mushrooms,Pepperoni,Salami   |
+    ### | Mushrooms,Onions,Peppers,Tomato Sauce,Tomatoes            |
+    ### | **2xBacon**,BBQ Sauce,Beef,Cheese,Chicken,Mushrooms,Pepperoni,Salami |
+    ### | Cheese,Mushrooms,Onions,Peppers,Tomato Sauce,Tomatoes     |
+    ### | Bacon,Cheese,Mushrooms,Onions,Peppers,Tomato Sauce,Tomatoes |
+    ### | Bacon,BBQ Sauce,Beef,Cheese,Chicken,Mushrooms,Pepperoni,Salami |
+    ### | **2xBacon**,BBQ Sauce,Beef,**2xChicken**,Mushrooms,Pepperoni,Salami |
+    ### | Bacon,BBQ Sauce,Beef,Cheese,Chicken,Mushrooms,Pepperoni,Salami |
+    ### | **2xBacon**,Beef,**2xCheese**,Chicken,Pepperoni,Salami            |
