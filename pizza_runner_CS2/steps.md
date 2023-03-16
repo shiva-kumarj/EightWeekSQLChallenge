@@ -187,10 +187,10 @@ I also utilized various SQL functions such as `round`, `coalesce`, and `lower` t
 
 4. Generate an order item for each record in the customers_orders table in the format of one of the following:
 
-    ### Meat Lovers
-    ### Meat Lovers - Exclude Beef
-    ### Meat Lovers - Extra Bacon
-    ### Meat Lovers - Exclude Cheese, Bacon - Extra Mushroom, Peppers
+    `Meat Lovers`
+    `Meat Lovers` - `Exclude Beef`
+    `Meat Lovers` - `Extra Bacon`
+    `Meat Lovers` - `Exclude Cheese, Bacon - Extra Mushroom, Peppers`
 
 
     | Order ID | Customer ID | Pizza ID | Exclusions | Extras | Order Time | Readable Pizza Order |
