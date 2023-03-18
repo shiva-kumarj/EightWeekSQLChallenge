@@ -38,6 +38,25 @@ from
 -- customers to rate their runner, how would you design an additional table for this 
 -- new dataset - generate a schema for this new table and insert your own data for 
 -- ratings for each successful customer order between 1 to 5.
+create table runner_rating
+(
+    "order_id" integer,
+    "runner_id" integer,
+    "rating" integer not null 
+        check(rating > 0 and rating < 6)
+)
+
+insert into runner_rating(order_id, runner_id, rating)
+values (1, 1, 4),
+(2, 1, 2),
+(3, 1, 5),
+(4, 2, 5),
+(5, 3, 1),
+(6, 3, 3),
+(7, 2, 4),
+(8, 2, 4), 
+(9, 2, 5),
+(10, 1, 4);
 
 
 -- 4. Using your newly generated table - can you join all of the information together to form a table which has the following information for successful deliveries?
@@ -52,8 +71,36 @@ from
 -- Average speed
 -- Total number of pizzas
 
-
+select customer_id, co.order_id, 
+runner_id, order_time, pickup_time,
+cast(datepart(minute, (pickup_time - order_time)) as varchar(max)) + 
+    ':' + 
+cast(datepart(second, (pickup_time - order_time)) as varchar(max)) as prep_time,
+duration, 
+cast(distance as float)/(cast(duration as float)/60) as avg_speed,
+count(co.order_id) over (order by co.order_id) as pizzas_delivered
+from customer_orders as co
+join runner_orders as ro
+on co.order_id = ro.order_id
+where pickup_time != 'null';
 
 -- 5. If a Meat Lovers pizza was $12 and Vegetarian $10 fixed prices with no cost for 
 -- extras and each runner is paid $0.30 per kilometre traveled - how much money does 
 -- Pizza Runner have left over after these deliveries?
+
+select sum(pizza_price - delivery_charge) as final_price
+from 
+(
+    select co.order_id, runner_id, 
+    cast(distance as int) as distance,
+    pizza_name,
+    case when pizza_name = 'Meatlovers' then 12
+    else 12 end as pizza_price,
+    round(cast(distance as float) * 0.3, 2) as delivery_charge
+    from runner_orders as ro
+    join customer_orders as co
+    on ro.order_id = co.order_id
+    join pizza_names as pn
+    on pn.pizza_id = co.pizza_id
+    where distance != '0'
+) as sub;
